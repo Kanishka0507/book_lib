@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Book Details</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 80px;
+            padding: 0;
+        }
+        .book-details {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .book-details h1 {
+            margin: 0 0 10px;
+        }
+        .book-details p {
+            margin: 5px 0;
+        }
+        .book-details p strong {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-details" id="book-details">
+        <!-- Book details will be displayed here dynamically -->
+    </div>
+
+    <script>
+        const books = [
+            { title: "The Hobbit", author:"J.R.R. Tolkien", description: "A fantasy novel about the journey of Bilbo Baggins.", category: 1 },
+            { title: "Dune", author:"Frank Herbert", description: "A science fiction novel about the desert planet Arrakis.", category: 2 },
+            { title: "Sherlock Holmes", author: "Arthur Conan Doyle", description: "A collection of mystery stories featuring Sherlock Holmes.", category: 3 },
+            { title: "Pride and Prejudice", author: "Jane Austen", description: "A romance novel about the manners of the British landed gentry.", category: 4 },
+            { title: "The Count of Monte Cristo", author: "Alexandre Dumas", description: "A historical novel about a man wrongly imprisoned.", category: 5 },
+            { title: "The Da Vinci Code", author: "Dan Brown", description: "A thriller novel about a symbologist who uncovers a secret society.", category: 6 },
+            { title: "Dracula", author: "Bram Stoker", description: "A horror novel about the vampire Count Dracula.", category: 7 },
+            { title: "The Adventures of Tom Sawyer", author: "Mark Twain", description: "An adventure novel about a boy growing up along the Mississippi River.", category: 8 },
+            { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", description: "A fantasy novel about a young wizard's first year at Hogwarts.", category: 1 },
+            { title: "Foundation", author: "Isaac Asimov", description: "A science fiction novel about the fall and rise of galactic empires.", category: 2 },
+            { title: "Gone with the Wind", author: "Margaret Mitchell", description: "A romance novel set in the American South during the Civil War.", category: 4 },
+            { title: "The Shining", author: "Stephen King", description: "A horror novel about a family in a haunted hotel.", category: 7 },
+            { title: "Treasure Island", author: "Robert Louis Stevenson", description: "An adventure novel about a young boy's search for buried treasure.", category: 8 },
+            { title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson", description: "A mystery novel about a journalist and a hacker investigating a disappearance.", category: 3 },
+            { title: "Jane Eyre", author: "Charlotte Brontë", description: "A historical novel about a young woman's journey to independence.", category: 5 },
+            { title: "The Hunger Games", author: "Suzanne Collins", description: "A dystopian novel about a girl fighting for survival in a deadly competition.", category: 1 },
+            { title: "The Name of the Wind", author: "Patrick Rothfuss", description: "A fantasy novel about the life and adventures of a magically gifted young man.", category: 1 },
+            { title: "The Notebook", author: "Nicholas Sparks", description: "A romance novel about the enduring love between two people.", category: 4 },
+            { title: "Misery", author: "Stephen King", description: "A horror novel about an author held captive by an obsessed fan.", category: 7 },
+            { title: "Robinson Crusoe", author: "Daniel Defoe", description: "An adventure novel about a man's survival on a deserted island.", category: 8 },
+            { title: "The Silence of the Lambs", author: "Thomas Harris", description: "A thriller novel about an FBI agent and a brilliant serial killer.", category: 6 },
+            { title: "Wuthering Heights", author: "Emily Brontë", description: "A historical novel about the passionate and destructive love between Heathcliff and Catherine.", category: 5 },
+            { title: "The Maze Runner", author: "James Dashner", description: "A dystopian novel about a group of teens trapped in a mysterious and deadly maze.", category: 1 },
+            { title: "Neuromancer", author: "William Gibson", description: "A science fiction novel about a washed-up computer hacker hired for one last job.", category: 2 },
+            { title: "Me Before You", author: "Jojo Moyes", description: "A romance novel about a young woman who forms an unlikely bond with a paralyzed man she cares for.", category: 4 },
+            { title: "It", author: "Stephen King", description: "A horror novel about a group of friends who confront an evil entity that preys on children.", category: 7 },
+            { title: "Journey to the Center of the Earth", author: "Jules Verne", description: "An adventure novel about a group of explorers who journey to the center of the earth.", category: 8 },
+            { title: "Murder on the Orient Express", author: "Agatha Christie", description: "A mystery novel about a famous detective who solves a murder on a luxury train.", category: 3 },
+        ];
+
+        function getBookDetails(title) {
+            return books.find(book => book.title === title);
+        }
+
+        function displayBookDetails(book) {
+            const bookDetailsDiv = document.getElementById('book-details');
+            if (book) {
+                bookDetailsDiv.innerHTML = `
+                    <h1>${book.title}</h1>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Description:</strong> ${book.description}</p>
+                `;
+            } else {
+                bookDetailsDiv.innerHTML = '<p>Book not found.</p>';
+            }
+        }
+
+        function initializeBookDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('title');
+            if (title) {
+                const book = getBookDetails(decodeURIComponent(title));
+                displayBookDetails(book);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeBookDetails);
+    </script>
+</body>
+</html>

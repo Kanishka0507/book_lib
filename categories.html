@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Book Categories</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 80px;
+            padding: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f5f5f4;
+            border-radius: 25px;
+        }
+        .selected {
+            background-color: #c3a5a5;
+        }
+        #category-books {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+            text-align: left;
+            text-size-adjust: 50%;
+            font-weight: 200;
+            font-display: 50%;
+            text size: 30%;
+        }
+        .book {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            background-color: #fafafa;
+        }
+        .book h3 {
+            margin: 0 0 10px;
+        }
+        .book p {
+            margin: 5px 0;
+        }
+        .book p strong {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Categories</h2>
+    <ul id="category-list">
+        <!-- Categories will be displayed here dynamically -->
+    </ul>
+    
+    <div id="category-books">
+        <!-- Books of selected category will be displayed here dynamically -->
+    </div>
+
+    <script>
+        const categories = [
+            { id: 1, name: "Fantasy" },
+            { id: 2, name: "Science Fiction" },
+            { id: 3, name: "Mystery" },
+            { id: 4, name: "Romance" },
+            { id: 5, name: "Historical Fiction" },
+            { id: 6, name: "Thriller" },
+            { id: 7, name: "Horror" },
+            { id: 8, name: "Adventure" },
+        ];
+
+        const books = [
+            { title: "The Hobbit", author:"J.R.R. Tolkien", category: 1 },
+            { title: "Dune", author:"Frank Herbert", category: 2 },
+            { title: "Sherlock Holmes", author: "Arthur Conan Doyle", category: 3 },
+            { title: "Pride and Prejudice", author: "Jane Austen", category: 4 },
+            { title: "The Count of Monte Cristo", author: "Alexandre Dumas", category: 5 },
+            { title: "The Da Vinci Code", author: "Dan Brown", category: 6 },
+            { title: "Dracula", author: "Bram Stoker", category: 7 },
+            { title: "The Adventures of Tom Sawyer", category: 8 },
+            { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", category: 1 },
+            { title: "Foundation", author: "Isaac Asimov", category: 2 },
+            { title: "Gone with the Wind", author: "Margaret Mitchell", category: 4 },
+            { title: "The Shining", author: "Stephen King", category: 7 },
+            { title: "Treasure Island", author: "Robert Louis Stevenson", category: 8 },
+            { title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson", category: 3 },
+            { title: "Jane Eyre", author: "Charlotte Brontë", category: 5 },
+            { title: "The Hunger Games", author: "Suzanne Collins", category: 1 },
+            { title: "The Name of the Wind", author: "Patrick Rothfuss", category: 1 },
+            { title: "The Notebook", author: "Nicholas Sparks", category: 4 },
+            { title: "Misery", author: "Stephen King", category: 7 },
+            { title: "Robinson Crusoe", author: "Daniel Defoe", category: 8 },
+            { title: "The Silence of the Lambs", author: "Thomas Harris", category: 6 },
+            { title: "Wuthering Heights", author: "Emily Brontë", category: 5 },
+            { title: "The Maze Runner", author: "James Dashner", category: 1 },
+            { title: "Neuromancer", author: "William Gibson", category: 2 },
+            { title: "Me Before You", author: "Jojo Moyes", category: 4 },
+            { title: "It", author: "Stephen King", category: 7 },
+            { title: "Journey to the Center of the Earth", author: "Jules Verne", category: 8 },
+            { title: "Murder on the Orient Express", author: "Agatha Christie", category: 3 },
+        ];
+
+        function createCategoryElement(category) {
+            const li = document.createElement('li');
+            li.textContent = category.name;
+            li.dataset.categoryId = category.id;
+            li.classList.add('category-item');
+            li.addEventListener('click', () => {
+                displayBooksByCategory(category.id);
+                highlightSelectedCategory(li);
+            });
+            return li;
+        }
+
+        function highlightSelectedCategory(selectedItem) {
+            const categoryItems = document.querySelectorAll('.category-item');
+            categoryItems.forEach(item => item.classList.remove('selected'));
+            selectedItem.classList.add('selected');
+        }
+
+        function createBookElement(book) {
+            const bookDiv = document.createElement('div');
+            bookDiv.classList.add('book');
+            bookDiv.innerHTML = `
+                <h3><a href="book-details.html?title=${encodeURIComponent(book.title)}">${book.title}</a></h3>
+                <p><strong>Author:</strong> ${book.author}</p>
+                <p><strong>Description:</strong> ${book.description}</p>
+            `;
+            return bookDiv;
+        }
+
+        function displayBooksByCategory(categoryId) {
+            const categoryBooksDiv = document.getElementById('category-books');
+            categoryBooksDiv.innerHTML = ''; 
+
+            const filteredBooks = books.filter(book => book.category === categoryId);
+            filteredBooks.forEach(book => {
+                const bookElement = createBookElement(book);
+                categoryBooksDiv.appendChild(bookElement);
+            });
+        }
+
+        function initializeCategories() {
+            const categoryList = document.getElementById('category-list');
+            categories.forEach(category => {
+                const categoryElement = createCategoryElement(category);
+                categoryList.appendChild(categoryElement);
+            });
+
+            if (categories.length > 0) {
+                displayBooksByCategory(categories[0].id);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeCategories);
+    </script>
+</body>
+</html>

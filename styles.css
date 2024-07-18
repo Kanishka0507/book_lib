@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url(book\ bg1.jpg);
+    background-image: url(https://tse3.mm.bing.net/th?id=OIP.zUzmH4ZrBDZ11g84wOC3jwHaDS&pid=Api&P=0&h=180   )
+    
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+    background-image: url(https://tse2.mm.bing.net/th?id=OIP.sUGB2uOam9d6GFyCaTkwtwHaC0&pid=Api&P=0&h=180);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+section {
+    padding: 2em;
+    background-color: white;
+    margin: 1em auto;
+    width: 80%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    color: black;
+    list-style-type: none;
+}
+section a{
+    color: #000;
+}
+
+.book, .category-book {
+    justify-content: center ;
+    align-items: center;
+    margin-top: 0%;
+    margin-bottom: 20%;
+    margin-left: 0%;
+    margin-right: 30%;
+    height:100%;
+    border-bottom: 1px solid #ccc;
+    padding: 1em 0;
+    color: black;
+    width:100%;
+    text-decoration: none;
+
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 1em;
+}
+
+form input, form textarea {
+    padding: 0.5em;
+    margin-top: 0.5em;
+}
+
+form button {
+    margin-top: 1em;
+    padding: 0.5em;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+#category-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#category-list li {
+    margin: 0.5em 0;
+    cursor: pointer;
+}
+
+#category-books {
+    margin-top: 2em;
+}
+
+.container
+{
+    justify-content: center ;
+    align-items: center;
+    margin-top: 0%;
+    margin-bottom: 20%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.book-rack
+{
+    margin-top: 0%;
+    padding-block: 0%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,mimax(200px,1fr));
+    gap:20px;
+}

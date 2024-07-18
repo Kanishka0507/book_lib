@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Book Collections</title>
+    <style>
+        /* Basic styling for demonstration */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        .book-rack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .book {
+            border: 1px solid #0c0b0b;
+            border-radius: 10px;
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+        .book h2 {
+            font-size: 1.2em;
+            margin: 0 0 10px;
+        }
+        .book p {
+            margin: 5px 0;
+        }
+        .book p.author {
+            font-weight: bold;
+        }
+        .book p.description {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-rack" id="book-list">
+        <!-- Books will be displayed here dynamically -->
+    </div>
+
+    <!-- Example script to dynamically populate books -->
+    <script>
+        const books = [
+            { title: "The Hobbit", author: "J.R.R. Tolkien", description: "A fantasy novel about the journey of Bilbo Baggins." },
+            { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", description: "The first book in the Harry Potter series." },
+            { title: "To Kill a Mockingbird", author: "Harper Lee", description: "A novel set in the American South during the 1930s." },
+            { title: "1984", author: "George Orwell", description: "A dystopian novel about totalitarian regime." },
+            { title: "Pride and Prejudice", author: "Jane Austen", description: "A romantic novel that critiques the British landed gentry." },
+            { title: "The Catcher in the Rye", author: "J.D. Salinger", description: "A novel about teenage rebellion and alienation." },
+            { title: "The Great Gatsby", author: "F. Scott Fitzgerald", description: "A novel about the American dream and society in the 1920s." },
+            { title: "Moby-Dick", author: "Herman Melville", description: "A novel about the voyage of the whaling ship Pequod." },
+            { title: "Brave New World", author: "Aldous Huxley", description: "A dystopian novel about a futuristic society." },
+            { title: "Jane Eyre", author: "Charlotte Brontë", description: "A novel about the experiences of the orphan Jane Eyre." },
+            { title: "The Lord of the Rings", author: "J.R.R. Tolkien", description: "A high-fantasy epic about the struggle for Middle-earth." },
+            { title: "War and Peace", author: "Leo Tolstoy", description: "A historical novel set during the Napoleonic Wars." },
+            { title: "Crime and Punishment", author: "Fyodor Dostoevsky", description: "A novel about the mental anguish and moral dilemmas of a poor ex-student." },
+            { title: "Anna Karenina", author: "Leo Tolstoy", description: "A novel about love and infidelity in imperial Russian society." },
+            { title: "The Odyssey", author: "Homer", description: "An epic poem about the adventures of Odysseus." },
+            { title: "The Adventures of Huckleberry Finn", author: "Mark Twain", description: "A novel about the adventures of a boy and a runaway slave." },
+            { title: "Frankenstein", author: "Mary Shelley", description: "A novel about the creation of a monster." },
+            { title: "Wuthering Heights", author: "Emily Brontë", description: "A novel about the tumultuous love between Heathcliff and Catherine." },
+            { title: "The Picture of Dorian Gray", author: "Oscar Wilde", description: "A novel about a man whose portrait ages instead of him." },
+            { title: "Don Quixote", author: "Miguel de Cervantes", description: "A novel about the adventures of a man who believes he is a knight." },
+            { title: "Gone with the Wind", author: "Margaret Mitchell", description: "A novel set in the American South during the Civil War." },
+            { title: "Les Misérables", author: "Victor Hugo", description: "A novel about the struggles of ex-convict Jean Valjean." },
+            { title: "The Brothers Karamazov", author: "Fyodor Dostoevsky", description: "A novel about the conflicting philosophies of three brothers." },
+            { title: "Alice's Adventures in Wonderland", author: "Lewis Carroll", description: "A novel about a girl's adventures in a fantastical world." },
+            { title: "Dracula", author: "Bram Stoker", description: "A novel about the vampire Count Dracula." },
+            { title: "The Count of Monte Cristo", author: "Alexandre Dumas", description: "A novel about a man wrongly imprisoned who seeks revenge." },
+            { title: "The Grapes of Wrath", author: "John Steinbeck", description: "A novel about the Joad family's journey to California." },
+            { title: "Catch-22", author: "Joseph Heller", description: "A novel about the absurdities of war." },
+            { title: "One Hundred Years of Solitude", author: "Gabriel García Márquez", description: "A novel about the Buendía family in the town of Macondo." },
+            { title: "Slaughterhouse-Five", author: "Kurt Vonnegut", description: "A novel about the bombing of Dresden in World War II." },
+            { title: "The Stranger", author: "Albert Camus", description: "A novel about the absurdity of human existence." }
+        ];
+
+        function createBookElement(book) {
+            const bookDiv = document.createElement('div');
+            bookDiv.classList.add('book');
+            bookDiv.innerHTML = `
+                <h2><a href="book.html?title=${encodeURIComponent(book.title)}">${book.title}</a></h2>
+                <p class="author">Author: ${book.author}</p>
+                <p class="description">${book.description}</p>
+            `;
+            return bookDiv;
+        }
+
+        function displayBooks() {
+            const bookListContainer = document.getElementById('book-list');
+            books.forEach(book => {
+                const bookElement = createBookElement(book);
+                bookListContainer.appendChild(bookElement);
+            });
+        }
+
+        window.onload = displayBooks;
+    </script>
+</body>
+</html>

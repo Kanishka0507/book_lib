@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Book Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        .book-detail {
+            display: flex;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #0c0b0b;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .book-detail img {
+            max-width: 400px;
+            height: auto;
+            margin-right: 40px;
+            border-radius: 45px;
+        }
+        .book-detail-content {
+            flex: 1;
+        }
+        .book-detail h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .book-detail p {
+            margin: 10px 0;
+        }
+        .book-detail p.author {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-detail" id="book-detail">
+        <!-- Book details will be displayed here dynamically -->
+    </div>
+
+    <script>
+        const books = [
+            {
+                title: "The Hobbit",
+                author: "J.R.R. Tolkien",
+                description: "A fantasy novel about the journey of Bilbo Baggins.",
+                imageUrl: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/interior_spreads/9781608873869/the-hobbit-9781608873869.in04.jpg",
+                content: "Bilbo Baggins, a hobbit, embarks on a perilous journey with a group of dwarves to reclaim their homeland from the dragon Smaug. Along the way, Bilbo discovers his own bravery and resourcefulness."
+            },
+            {
+                title: "Harry Potter and the Philosopher's Stone",
+                author: "J.K. Rowling",
+                description: "The first book in the Harry Potter series.",
+                imageUrl: "https://images.thenile.io/r1000/9780747554561.jpg",
+                content: "Harry Potter, a young boy who discovers he is a wizard, attends Hogwarts School of Witchcraft and Wizardry. There, he learns about his past and his connection to the dark wizard Voldemort."
+            },
+            {
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                description: "A novel set in the American South during the 1930s.",
+                imageUrl: "https://andrewnurnberg.com/wp-content/uploads/2018/10/High-resolution-UK-cover.jpg",
+                content: "Scout Finch, a young girl in the racially charged South, witnesses her father, Atticus Finch, defend a black man falsely accused of raping a white woman. The novel explores themes of racial injustice and moral growth."
+            },
+            {
+                title: "1984",
+                author: "George Orwell",
+                description: "A dystopian novel about a totalitarian regime.",
+                imageUrl: "https://images.thalia.media/07/-/cbed699587704a8a9bc0a1e96b90493f/1984-gebundene-ausgabe-george-orwell.jpeg",
+                content: "Winston Smith lives in a society controlled by Big Brother, where surveillance and propaganda are omnipresent. He struggles with his own thoughts and a desire for freedom in a world where individuality is punished."
+            },
+            {
+                title: "Pride and Prejudice",
+                author: "Jane Austen",
+                description: "A romantic novel that critiques the British landed gentry.",
+                imageUrl: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781471134746/pride-and-prejudice-9781471134746_hr.jpg",
+                content: "Elizabeth Bennet navigates societal expectations, family dynamics, and her own prejudices as she encounters the enigmatic Mr. Darcy. The novel explores themes of love, class, and personal growth."
+            },
+            {
+                title: "The Catcher in the Rye",
+                author: "J.D. Salinger",
+                description: "A novel about teenage rebellion and alienation.",
+                imageUrl: "https://mpower.stmaryscollege.in/wp-content/uploads/2021/07/The_Catcher_in_the_Rye_1951_first_edition_cover.jpg",
+                content: "Holden Caulfield, a disenchanted teenager, recounts his experiences in New York City after being expelled from prep school. His narrative captures the struggles of adolescence and a quest for identity."
+            },
+            {
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald",
+                description: "A novel about the American dream and society in the 1920s.",
+                imageUrl: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781524879761/the-great-gatsby-9781524879761_hr.jpg",
+                content: "Jay Gatsby, a mysterious millionaire, pursues his lost love, Daisy Buchanan, amidst the lavish and morally ambiguous world of 1920s New York. The novel critiques the American dream and the pursuit of wealth."
+            },
+            {
+                title: "Moby-Dick",
+                author: "Herman Melville",
+                description: "A novel about the voyage of the whaling ship Pequod.",
+                imageUrl: "http://fc02.deviantart.net/fs71/f/2013/298/5/e/moby_dick_book_cover_by_mario0357-d6rt002.jpg",
+                content: "Captain Ahab obsessively hunts the white whale, Moby-Dick, on a perilous sea voyage. The novel explores themes of obsession, revenge, and the human condition through its rich symbolism and complex characters."
+            },
+            {
+                title: "Brave New World",
+                author: "Aldous Huxley",
+                description: "A dystopian novel about a futuristic society.",
+                imageUrl: "https://tse2.mm.bing.net/th?id=OIP.Wq5p6Atal6UNAX9uAPB2bAHaK4&pid=Api&P=0&h=180",
+                content: "In a technologically advanced future, humanity lives under strict control, sacrificing individuality for societal stability. Bernard Marx and John the Savage challenge the norms of this seemingly perfect world."
+            },
+            {
+                title: "Jane Eyre",
+                author: "Charlotte Brontë",
+                description: "A novel about the experiences of the orphan Jane Eyre.",
+                imageUrl: "https://www.bibdsl.co.uk/imagegallery2/publisher/batch1692/9781474924955.JPG",
+                content: "Orphaned and mistreated, Jane Eyre grows up to become a governess at Thornfield Hall, where she falls in love with the enigmatic Mr. Rochester. The novel explores themes of love, independence, and morality."
+            },
+            {
+                title: "The Lord of the Rings",
+                author: "J.R.R. Tolkien",
+                description: "A high-fantasy epic about the struggle for Middle-earth.",
+                imageUrl: "https://images-na.ssl-images-amazon.com/images/S/pv-target-images/cf28bbd7fed8541b67dadc3b29b82440829e72a6c2213788d649078bfa104b4d._RI_V_TTW_.jpg",
+                content: "Frodo Baggins embarks on a quest to destroy the One Ring and thwart the dark lord Sauron. The epic journey through Middle-earth is filled with battles, alliances, and the enduring power of friendship."
+            },
+            {
+                title: "War and Peace",
+                author: "Leo Tolstoy",
+                description: "A historical novel set during the Napoleonic Wars.",
+                imageUrl: "https://mynextreadinglist.com/wp-content/uploads/2019/01/71ykhMyjntL.jpg",
+                content: "Amidst the backdrop of the Napoleonic Wars, the lives of several Russian aristocratic families intertwine. The novel delves into themes of war, peace, love, and the passage of time through its expansive narrative."
+            },
+            {
+                title: "Crime and Punishment",
+                author: "Fyodor Dostoevsky",
+                description: "A novel about the mental anguish and moral dilemmas of a poor ex-student.",
+                imageUrl: "https://d3525k1ryd2155.cloudfront.net/h/147/085/973085147.0.x.jpg",
+                content: "Raskolnikov, a destitute former student, commits a murder and grapples with guilt, paranoia, and moral questions. The novel explores the psychological torment and ethical struggles of its protagonist."
+            },
+            {
+                title: "Anna Karenina",
+                author: "Leo Tolstoy",
+                description: "A novel about love and infidelity in imperial Russian society.",
+                imageUrl: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781451685558/anna-karenina-9781451685558_hr.jpg",
+                content: "Anna Karenina, trapped in a loveless marriage, begins an affair with Count Vronsky, leading to scandal and tragedy. The novel juxtaposes her story with that of the idealistic landowner Levin."
+            },
+            {
+                title: "The Odyssey",
+                author: "Homer",
+                description: "An epic poem about the adventures of Odysseus.",
+                imageUrl: "https://res.cloudinary.com/jerrick/image/upload/c_scale,f_jpg,q_auto/5e1f52b278f064001ebc4bd0.jpg",
+                content: "Odysseus embarks on a perilous journey home after the Trojan War, facing mythical creatures and divine interventions. The epic explores themes of heroism, loyalty, and the struggle against fate."
+            },
+            {
+                title: "The Adventures of Huckleberry Finn",
+                author: "Mark Twain",
+                description: "A novel about the adventures of a boy and a runaway slave.",
+                imageUrl: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781481403757/the-adventures-of-huckleberry-finn-9781481403757_hr.jpg",
+                content: "Huckleberry Finn, escaping from his abusive father, teams up with Jim, a runaway slave. Their journey down the Mississippi River is a profound exploration of freedom, friendship, and the American South."
+            },
+            {
+                title: "Frankenstein",
+                author: "Mary Shelley",
+                description: "A novel about the creation of a monster.",
+                imageUrl: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781982146160/frankenstein-9781982146160_hr.jpg",
+                content: "Victor Frankenstein creates a sentient being, only to abandon it in horror. The novel explores the consequences of unchecked ambition and the moral responsibilities of creators toward their creations."
+            },
+            {
+                title: "Wuthering Heights",
+                author: "Emily Brontë",
+                description: "A novel about the tumultuous love between Heathcliff and Catherine.",
+                imageUrl: "https://booksloveme.com/wp-content/uploads/2020/07/Wuthering-Heights-book-review.jpg",
+                content: "The intense and destructive love between Heathcliff and Catherine Earnshaw haunts the desolate moors. The novel delves into themes of passion, revenge, and the cyclical nature of suffering."
+            },
+            {
+                title: "The Picture of Dorian Gray",
+                author: "Oscar Wilde",
+                description: "A novel about a man whose portrait ages instead of him.",
+                imageUrl: "https://cdn2.penguin.com.au/covers/original/9780099511144.jpg",
+                content: "Dorian Gray, wishing to remain forever young, finds his portrait aging in his place. As he indulges in hedonism and corruption, the portrait reveals the true cost of his lifestyle."
+            },
+            {
+                title: "Don Quixote",
+                author: "Miguel de Cervantes",
+                description: "A novel about the adventures of a man who believes he is a knight.",
+                imageUrl: "https://files.readanybook.com/359024/files/don-quixote.jpg",
+                content: "Don Quixote, an aging man inspired by chivalric romances, sets out on a series of misadventures with his loyal squire, Sancho Panza. The novel is a satirical exploration of idealism and reality."
+            },
+            {
+                title: "Gone with the Wind",
+                author: "Margaret Mitchell",
+                description: "A novel set in the American South during the Civil War.",
+                imageUrl: "https://i.pinimg.com/originals/67/5b/01/675b01444d89e5af91d30ecd9ae773ef.jpg",
+                content: "Scarlett O'Hara navigates love, loss, and survival during the American Civil War and Reconstruction era. Her tenacity and resilience are central to this epic tale of southern life."
+            },
+            {
+                title: "Les Misérables",
+                author: "Victor Hugo",
+                description: "A novel about the struggles of ex-convict Jean Valjean.",
+                imageUrl: "https://i.pinimg.com/736x/c4/4e/e0/c44ee09b71fa6dc8029bb274e001c937--penguin-classics-victor-hugo.jpg",
+                content: "Jean Valjean, seeking redemption after imprisonment, is pursued by the relentless Inspector Javert. The novel intertwines his story with the social and political turmoil of 19th-century France."
+            },
+            {
+                title: "The Brothers Karamazov",
+                author: "Fyodor Dostoevsky",
+                description: "A novel about the conflicting philosophies of three brothers.",
+                imageUrl: "https://cdn2.penguin.com.au/covers/original/9780553212167.jpg",
+                content: "The Karamazov brothers—Dmitri, Ivan, and Alyosha—struggle with faith, doubt, and familial conflict. The novel explores deep philosophical questions through the lens of their intertwined lives."
+            },
+            {
+                title: "Alice's Adventures in Wonderland",
+                author: "Lewis Carroll",
+                description: "A novel about a girl's adventures in a fantastical world.",
+                imageUrl: "https://i.thenile.io/r1000/9780375866418.jpg?r=6072f71f5c44c",
+                content: "Alice falls down a rabbit hole into a whimsical world filled with eccentric characters and nonsensical events. The story is a playful exploration of imagination and curiosity."
+            },
+            {
+                title: "Dracula",
+                author: "Bram Stoker",
+                description: "A novel about the vampire Count Dracula.",
+                imageUrl: "https://miro.medium.com/v2/resize:fit:1000/1*3US2qS3OLXELxVA0AEVZxQ.jpeg",
+                content: "Jonathan Harker's encounter with Count Dracula initiates a battle between the vampire and a group of people determined to stop his reign of terror. The novel is a cornerstone of gothic horror literature."
+            },
+            {
+                title: "The Count of Monte Cristo",
+                author: "Alexandre Dumas",
+                description: "A novel about a man wrongly imprisoned who seeks revenge.",
+                imageUrl: "https://i.thenile.io/r1000/9780746097007.jpg?r=5e804e7a0830b",
+                content: "Edmond Dantès, wrongfully imprisoned, escapes and transforms himself into the wealthy Count of Monte Cristo. He systematically seeks vengeance against those who betrayed him."
+            },
+            {
+                title: "The Grapes of Wrath",
+                author: "John Steinbeck",
+                description: "A novel about the Joad family's journey to California.",
+                imageUrl: "http://static1.squarespace.com/static/50b67298e4b05c3cd8b81744/5418b5ede4b062d1159a2e2e/561f836ee4b0b4d344220e9e/1444941200323/?format=1000w",
+                content: "The Joad family, driven from their Oklahoma home by the Dust Bowl, journey to California in search of a better life. The novel portrays the hardships and resilience of migrant workers during the Great Depression."
+            },
+            {
+                title: "Catch-22",
+                author: "Joseph Heller",
+                description: "A novel about the absurdities of war.",
+                imageUrl: "https://www.studypool.com/images/studyGuides/Catch-22/Book_Cover.jpg",
+                content: "Captain John Yossarian, a bomber pilot in World War II, confronts the absurd and contradictory rules of military bureaucracy. The novel's dark humor and satire highlight the futility of war."
+            },
+            {
+                title: "One Hundred Years of Solitude",
+                author: "Gabriel García Márquez",
+                description: "A novel about the Buendía family in the town of Macondo.",
+                imageUrl: "https://i.pinimg.com/originals/1e/23/14/1e2314c3500d457dca6bbdb75883f2e3.jpg",
+                content: "The multi-generational saga of the Buendía family unfolds in the mythical town of Macondo. The novel blends magical realism with themes of love, power, and destiny."
+            },
+            {
+                title: "Slaughterhouse-Five",
+                author: "Kurt Vonnegut",
+                description: "A novel about the bombing of Dresden in World War II.",
+                imageUrl: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781684156252/slaughterhouse-five-9781684156252_hr.jpg",
+                content: "Billy Pilgrim becomes 'unstuck in time' and experiences moments from his life out of sequence, including his time as a prisoner of war during the bombing of Dresden. The novel explores free will and the destructiveness of war."
+            },
+            {
+                title: "The Stranger",
+                author: "Albert Camus",
+                description: "A novel about the absurdity of human existence.",
+                imageUrl: "http://jeffreycscott.com/wp-content/uploads/2019/03/The-Stranger-English-Cover.jpg",
+                content: "Meursault, an indifferent French Algerian, commits a senseless murder and faces the absurdity of existence. The novel delves into existentialism and the alienation of modern life."
+            }
+        ];
+
+        function getBookDetails(title) {
+            return books.find(book => book.title === title);
+        }
+
+        function displayBookDetails(book) {
+            const bookDetailContainer = document.getElementById('book-detail');
+            bookDetailContainer.innerHTML = `
+                <img src="${book.imageUrl}" alt="${book.title} Cover Image">
+                <div class="book-detail-content">
+                    <h2>${book.title}</h2>
+                    <p class="author">Author: ${book.author}</p>
+                    <p class="description">${book.description}</p>
+                    <p class="content">${book.content}</p>
+                </div>
+            `;
+        }
+
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const title = params.get('title');
+            if (title) {
+                const book = getBookDetails(decodeURIComponent(title));
+                if (book) {
+                    displayBookDetails(book);
+                } else {
+                    document.getElementById('book-detail').innerHTML = '<p>Book not found</p>';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
